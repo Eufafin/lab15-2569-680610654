@@ -104,23 +104,23 @@ const availableCourses = courses.filter(
     className="w-full min-w-0 overflow-hidden"
   >
 <SelectValue placeholder="เลือกวิชา">
-  <span className="min-w-0 block">
-    {courseId
-      ? (() => {
-          const selectedCourse = courses.find(
-            (course) => course.courseId === courseId
-          );
+  {courseId ? (
+    <span className="min-w-0 block">
+      {(() => {
+        const selectedCourse = courses.find(
+          (course) => course.courseId === courseId
+        );
 
-          return selectedCourse
-            ? `${selectedCourse.courseId} - ${selectedCourse.courseTitle}`
-            : "";
-        })()
-      : ""}
-  </span>
+        return selectedCourse
+          ? `${selectedCourse.courseId} - ${selectedCourse.courseTitle}`
+          : "";
+      })()}
+    </span>
+  ) : null}
 </SelectValue>
   </SelectTrigger>
 
-  <SelectContent>
+  <SelectContent >
     {availableCourses.map((course) => (
       <SelectItem
         key={course.courseId}
