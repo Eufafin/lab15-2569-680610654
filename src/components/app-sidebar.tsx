@@ -11,7 +11,19 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar";
+
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+
+import { currentUser } from "@/lib/mock-data";
 
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
@@ -26,16 +38,19 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <div className="px-2 py-1 text-sm font-semibold">CPE & ISNE</div>
+        <div className="px-2 py-1 text-sm font-semibold">
+          CPE & ISNE
+        </div>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>เมนูหลัก</SidebarGroupLabel>
+
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  {/* ✅ แก้ไข: Base UI ใช้ `render={<Link />}` แทน `asChild` */}
                   <SidebarMenuButton
                     isActive={location.pathname === item.url}
                     render={<Link to={item.url} />}
@@ -49,6 +64,37 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      {/* User information */}
+      <SidebarFooter>
+        <Separator />
+
+        <div className="flex items-center gap-3 p-2">
+          <Avatar>
+            <AvatarImage
+              src={currentUser.avatar}
+              alt={currentUser.nickname}
+            />
+
+            <AvatarFallback>
+              {currentUser.nickname.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
+            <span className="truncate text-sm font-medium">
+              {currentUser.nickname}
+            </span>
+
+            <Badge
+              variant="secondary"
+              className="w-fit text-xs"
+            >
+              {currentUser.role}
+            </Badge>
+          </div>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
