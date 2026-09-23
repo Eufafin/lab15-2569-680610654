@@ -1,8 +1,17 @@
+import { cn } from "@/lib/utils";
 
+type FooterProps = {
+  className?: string;
+};
 
-export function Footer() {
+export function Footer({ className }: FooterProps) {
   return (
-    <footer className="h-[50px] shrink-0 border-t flex items-center justify-center text-xs text-muted-foreground">
+    <footer
+      className={cn(
+        "h-[50px] shrink-0 border-t flex items-center justify-center text-xs text-muted-foreground",
+        className
+      )}
+    >
       จัดทำโดย Kittipat Namjak รหัสนักศึกษา 680610654
     </footer>
   );
